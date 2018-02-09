@@ -1,0 +1,27 @@
+﻿{block content}
+    {include '../cechinfo.latte'}
+    
+    <ul class="nav nav-tabs">
+        <li role="presentation" {if $TAB == 0} class="active"{/if}><a n:href="Cech:showAll 0">Prehľad členov</a></li>
+        <li role="presentation" {if $TAB == 1} class="active" {/if}><a n:href="Cech:showAll 1">Prehľad cechových VB</a></li>
+        <li role="presentation" {if $TAB == 2} class="active" {/if}><a n:href="Cech:showAll 2">Prehľad príspevkov a CE</a></li>
+		<li role="presentation" {if $TAB == 3} class="active" {/if}><a n:href="Cech:showAll 3">Spotreba surovín na CE</a></li>
+    </ul>
+    
+    <br>
+    
+    {if $TAB == 1}
+        {* prehľad cechových budov *}
+		{include 'uroven_cechovych_VB.latte'}
+    {elseif $TAB == 2}
+        {* prehľad cechových expedícií *}
+		{include 'prehlad_CE.latte'}
+    {elseif $TAB == 3}
+        {* spotreba surovin na otvorenie 2., 3. a 4. urovne *}
+        {include 'spotreba_surovin_CE.latte'}
+	{else}
+        {* standardny TAB *}
+        {include 'all_vypis_clenov.latte'}
+    {/if}
+
+{/block}

@@ -1,0 +1,55 @@
+{block content}
+
+<div>
+    <div class="menu_box_left">
+	<a n:href="Homepage:" class="btn btn-primary btn-sm active" role="button">Späť na prehľad cechu</a>
+    </div>
+
+    {include '../cechinfo.latte'}
+
+    <h2 style="color: red">Hromadné pridanie príspevkov CE a VB pre všetkých členov.</h2>
+
+{*
+    {control hromadnyPrispevokForm}
+*}
+<form n:name=hromadnyPrispevokForm class=form>
+    <p><label n:name=termin>Týždeň:&nbsp;</label><select n:name=termin></select>
+    <label n:name=rok>Rok:&nbsp;</label><select n:name=rok></select>
+    <input n:name=sendHromadnyPrispevok class="btn btn-primary btn-sm active"></p>
+
+        {foreach $users_cech as $clen}
+                <table style="border-style: solid">
+                    <tr class="required">
+                        <td class="bunka"><label class="required">{$clen->nick}</label></td>
+                        <td class="bunka">
+                            <span>CE:</span>
+                            <input type="number" value={$exist_prispevky2[$clen->userid]['CE']} style="width: 50px" name="dataCE[]" class="text" form="frm-hromadnyPrispevokForm">
+                        </td>
+                        <td class="bunka">
+                            <span>Príspevok do VB:</span>
+                            <input type="number" value={$exist_prispevky2[$clen->userid]['bodyVB']} style="width: 50px" name="dataVB[]" class="text" form="frm-hromadnyPrispevokForm">
+                        </td>
+                    </tr>
+                </table>
+                <br>
+        {/foreach}
+    <p><input n:name=sendHromadnyPrispevok class="btn btn-primary btn-sm active"></p>
+</form>
+    <br>
+    <div class="menu_box_left">
+	<a n:href="Homepage:" class="btn btn-primary btn-sm active" role="button">Späť na prehľad cechu</a>
+    </div>
+</div>
+<style>
+    .bunka {
+        width: 200px;
+        text-align: center;
+        font-size: 12px;
+    }
+    
+    .era1 {
+        color: navy;
+        font-size: 12px;
+    }
+    
+</style>

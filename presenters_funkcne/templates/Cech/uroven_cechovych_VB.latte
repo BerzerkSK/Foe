@@ -1,0 +1,20 @@
+<div>
+    <table class="table table-striped">
+        <tr>
+            <th>Éra</th>
+			<th class="bunka">Počet hráčov v ére</th>
+            <th class="bunka">Hvezdáreň</th>
+            <th class="bunka">Atómium</th>
+            <th class="bunka">Oblúk</th>
+        </tr>
+        <tr n:foreach="$ery as $era">
+{*            {var $iter = $iterator->counter} {* od doby kamennej *}
+            {var $iter = count($ery)-$iterator->counter+1} {* od najnovsej doby *}
+            <td>{$ery[$iter]['nazov']}</td>
+			<td class="bunka"><span n:if="(array_key_exists($iter, $cechove_VB) && $cechove_VB [$iter]['hraci'] > 0)">{$cechove_VB [$iter]['hraci']}</span></td>
+            <td class="bunka"><span n:if="(array_key_exists($iter, $cechove_VB) && $cechove_VB [$iter]['hvezdaren'] > 0)">{$cechove_VB [$iter]['hvezdaren']}</span></td>
+            <td class="bunka"><span n:if="(array_key_exists($iter, $cechove_VB) && $cechove_VB [$iter]['atomium'] > 0)">{$cechove_VB [$iter]['atomium']}</span></td>
+            <td class="bunka"><span n:if="(array_key_exists($iter, $cechove_VB) && $cechove_VB [$iter]['obluk'] > 0)">{$cechove_VB [$iter]['obluk']}</span></td>
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,50 @@
+{block content}
+
+<div>
+    <div class="menu_box_left">
+		<a n:href="Prispevok:vypisVsetko $id_user" class="btn btn-primary btn-sm active" role="button">Späť na prehľad príspevkov</a>
+	</div>
+
+    {include '../cechinfo.latte'}
+
+    <h2 style="color: red">Úprava príspevku hráča: {$user_edited->fetchField('nick')}</h2>
+	
+
+    {control editPrispevokForm}
+        {var $iter_sur = 0}
+        {foreach $ery as $key => $era}
+            {ifset $suroviny[$iterator->counter]}
+                {var $iter = count($ery) - $iterator->counter + 1}
+                <p><strong class="era1">{$era}</strong></p>
+                <table style="border-style: solid">
+                    <tr class="required">
+                        <td class="bunka" n:for="$i=0; $i<count($suroviny[$iter]); $i++"><label class="required">{$suroviny[$iter][$i]}</label></td>
+                    </tr>
+                    <tr>
+                        <td class="bunka" n:for="$j=0; $j<count($suroviny[$iter]); $j++"><input type="number" value={$prispevok_sur[$iter_sur+$j]} style="width: 50px" name="sur[]" class="text" form="frm-editPrispevokForm"></td>
+                    </tr>
+                </table>
+                {var $iter_sur = $iter_sur+5}
+            {/ifset}
+        {/foreach}
+
+    <br>
+	<div class="menu_box_left">
+		<a n:href="Prispevok:vypisVsetko $id_user" class="btn btn-primary btn-sm active" role="button">Späť na prehľad príspevkov</a>
+	</div>
+
+</div>
+
+<style>
+    .bunka {
+        width: 200px;
+        text-align: center;
+        font-size: 12px;
+    }
+    
+    .era1 {
+        color: navy;
+        font-size: 12px;
+    }
+    
+</style>

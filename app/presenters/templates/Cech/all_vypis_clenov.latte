@@ -1,0 +1,49 @@
+<div n:if="$users_cech">
+        <div>
+            <table class="table table-striped">
+                <tr>
+                    <th>Hráč</th>
+{*					<th n:if="!($is_role_clen)"><span title="Posledné prihlásenie">Prihlásenie</span></th>
+*}                    <th>Éra</th>
+                    <th title="Chrám relikvií">ChR</th>
+                    <th title="Alcatraz">ALC</th>
+                    <th title="Hvezdáreň">HV</th>
+                    <th title="Atómium">AT</th>
+                    <th title="Oblúk">OB</th>
+                    <th title="Suroviny z VB za 7 dní pri pravidelnom vyberaní (uvedený počet každej suroviny, nie spolu)">S/7D</th>
+                    <th title="Príspevky hráča">Príspevky</th>
+                </tr>
+                <tr n:foreach="$users_cech as $clen" 
+{*					{if !$is_role_clen} 
+						{if $clen->last_login !== null}
+							title="Posledné prihlásenie: {$clen->last_login|date:'%d.%m.%Y - %H:%M:%S''}{if $clen->poznamka<>""} - {$clen->poznamka}"{else}"{/if}
+						{else}
+							title="{$clen->poznamka}"
+						{/if}
+					{/if}
+*}				>
+                    <td><a n:tag-if="($is_role_admin) || ($is_role_clen && $user_id == $clen->userid)" n:href="User:edit $clen->userid" class="btn btn-default btn-sm active" role="button">{$clen->nick}</a></td>
+{*                    <td n:if="!($is_role_clen)"><span n:if="$clen->last_login !== null" style="color: green">{$clen->last_login|date:'%d.%m.%Y - %H:%M:%S''}</span></td>
+*}					<td>{$ery[$clen->era]['nazov']}</td>
+                    <td style="text-align: center"><span n:if="$clen->relikvie > 0" title="Chrám relikvií">{$clen->relikvie}</span></td>
+                    <td style="text-align: center"><span n:if="$clen->alcatraz > 0" title="Alcatraz">{$clen->alcatraz}</span></td>
+                    <td style="text-align: center"><span n:if="$clen->hvezdaren > 0" title="Hvezdáreň">{$clen->hvezdaren}</span></td>
+                    <td style="text-align: center"><span n:if="$clen->atomium > 0" title="Atómium">{$clen->atomium}</span></td>
+                    <td style="text-align: center"><span n:if="$clen->obluk > 0" title="Oblúk">{$clen->obluk}</span></td>
+					
+                    {var $suroviny_spolu = 5*(($hvezdaren_info[$clen->hvezdaren] * 1)+($atomium_info[$clen->atomium] * 1)+($obluk_info[$clen->obluk] * 1))}
+					
+                    <td style="text-align: center"><span n:if="$suroviny_spolu > 0" title="Suroviny celkom">{$suroviny_spolu}</span></td>
+                    <td>
+			<a n:if="($is_role_admin)" n:href="Prispevok:vypisVsetko $clen->userid" class="btn btn-default btn-sm active" role="button">Príspevky</a>
+{*			<a n:if="($is_role_admin) || ($is_role_clen && $user_id == $clen->userid)" n:href="Prispevok:vypisVsetko $clen->userid" class="btn btn-default btn-sm active" role="button">Príspevky</a>
+*}
+                    </td>
+                    <tr n:if="!($is_role_clen)">
+			<td>Poznámka:</td>
+			<td colspan="8"><p n:if="$clen->last_login !== null" style="color: green">Posledné prihlásenie: {$clen->last_login|date:'%d.%m.%Y - %H:%M:%S'}</p>{$clen->poznamka|noescape}</td>
+                    </tr>
+                </tr>
+            </table>
+        </div>
+    </div>

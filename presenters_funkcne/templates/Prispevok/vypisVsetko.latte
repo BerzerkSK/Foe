@@ -1,0 +1,34 @@
+{block content}
+<div>
+    <br>
+    <div class="menu_box_left">
+	<a n:href="Cech:showAll" class="btn btn-primary btn-sm active" role="button">Späť na prehľad cechu</a>
+	<a n:href="Prispevok:addPrispevok $id"  class="btn btn-primary btn-sm active" role="button">Nový príspevok</a>
+    </div>
+    
+    {include '../cechinfo.latte'}
+    <h2>Úprava príspevkov hráča: {$user_edited->fetchField('nick')}</h2>
+    
+    <div n:ifset="$prispevok_sum">
+        <table class="table table-striped">
+            <tr>
+                <th style="text-align: center">Týždeň</th>
+                <th style="text-align: center">Suroviny celkom</th>
+                <th style="text-align: center">Body do VB</th>
+                <th style="text-align: center">CE</th>
+                <th style="text-align: center">Upraviť</th>
+            </tr>
+            <tr n:foreach="$prispevky as $prispevok">
+                <td style="text-align: center">{$prispevok['termin']}</td>
+                <td style="text-align: center">{$prispevok_sum[$iterator->counter - 1]}</td>
+                <td style="text-align: center">{$prispevok['bodyVB']}</td>
+                <td style="text-align: center">{$prispevok['CE']}</td>
+                <td n:if="!$is_role_clen || $id == $user_id" style="text-align: center">
+                    <a n:href="Prispevok:editPrispevok $prispevok['id'], $id_user" class="btn btn-default btn-sm active" role="button">Upraviť</a>
+		</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+{/block}

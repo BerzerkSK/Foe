@@ -1,0 +1,9 @@
+parameters:
+
+
+database:
+	dsn: 'mysql:host=localhost;dbname=foe1490268841'
+	user: foe1490268841
+	password: K6kJfGIq
+	options:
+		lazy: yes

@@ -1,0 +1,38 @@
+<div>
+    <table class="table table-striped">
+        <tr>
+            <th>Éra</th>
+            <th class="bunka">Suroviny na 2. kolo</th>
+            <th class="bunka">Suroviny na 3. kolo</th>
+            <th class="bunka">Suroviny na 4. kolo</th>
+            <th class="bunka">Suroviny spolu</th>
+        </tr>
+		
+        {var $pocet_sur = 0}
+		
+	<tr n:foreach="$ery as $era">
+{*            {var $iter = $iterator->counter} {* od doby kamennej *}
+            {var $iter = count($ery)-$iterator->counter+1} {* od najnovsej doby *}
+            {if $iter == 3 || $iter == 4}
+		{var $pocet_sur = 2}
+            {/if}
+            {if $iter == 5}
+		{var $pocet_sur = 3}
+            {/if}
+            {if $iter == 6 || $iter == 7}
+		{var $pocet_sur = 4}
+            {/if}
+            {if $iter > 7 && $iter < 13}
+		{var $pocet_sur = 5}
+            {/if}
+            {if $iter > 12}
+		{var $pocet_sur = 6}
+            {/if}
+            <td>{$ery[$iter]['nazov']}</td>
+            <td class="bunka"><span n:if="(array_key_exists($iter, $cechove_VB) && $cechove_VB [$iter]['hraci'] > 0)">{$cechove_VB [$iter]['hraci'] * $pocet_sur} z každej suroviny</span></td>
+            <td class="bunka"><span n:if="(array_key_exists($iter, $cechove_VB) && $cechove_VB [$iter]['hraci'] > 0)">{$cechove_VB [$iter]['hraci'] * ($pocet_sur * 2)} z každej suroviny</span></td>
+            <td class="bunka"><span n:if="(array_key_exists($iter, $cechove_VB) && $cechove_VB [$iter]['hraci'] > 0)">{$cechove_VB [$iter]['hraci'] * ($pocet_sur * 4)} z každej suroviny</span></td>
+            <td class="bunka"><span n:if="(array_key_exists($iter, $cechove_VB) && $cechove_VB [$iter]['hraci'] > 0)">{$cechove_VB [$iter]['hraci'] * (($pocet_sur)+($pocet_sur * 2)+($pocet_sur * 4))} z každej suroviny</span></td>
+        </tr>
+    </table>
+</div>

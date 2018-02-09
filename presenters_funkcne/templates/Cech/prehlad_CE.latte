@@ -1,0 +1,21 @@
+<div>
+    {control baseLawForm}
+	<h3>Výhry v CE: {$CE_spolu} % (Informatívny výpočet)</h3>
+	<div>
+    <table class="table table-striped">
+        <tr>
+            <th>Hráč</th>
+            <th class="bunka" title="Aktuálny týždeň">Príspevok do vybranej VB</th>
+            <th class="bunka" title="Aktuálny týždeň">výhry v CE</th>
+            <th title="Celkový príspevok surovín v aktuálnom týždni">Suroviny celkom</th>
+        </tr>
+        <tr n:foreach="$users_cech as $clen">
+            <td>{$clen->nick}</td>
+            <td class="bunka"><span n:if="(array_key_exists($clen->userid, $data) && $data [$clen->userid]['bodyVB'] > 0)">{$data [$clen->userid]['bodyVB']}</span></td>
+            <td class="bunka"><span n:if="(array_key_exists($clen->userid, $data) && $data [$clen->userid]['CE'] > 0)">{$data [$clen->userid]['CE']} / 48</span></td>
+            <td class="bunka"><span n:if="(array_key_exists($clen->userid, $data) && $data [$clen->userid]['suroviny'] > 0)"">{$data [$clen->userid][suroviny]}</span></td>
+        </tr>
+    </table>
+</div>
+
+</div>

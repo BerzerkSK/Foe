@@ -1,0 +1,96 @@
+{**
+ * @param string   $basePath web base path
+ * @param array    $flashes  flash messages
+ *}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>{ifset title}{include title|stripHtml} | {/ifset}Forge of empires - cech</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="{$basePath}/3rd/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="{$basePath}/css/style.css">
+	{block head}{/block}
+</head>
+
+<body>
+
+	<div id="banner">
+            <h1>Forge of empires - cech</h1>
+        </div>
+        
+        <div id="content">
+            <div id="menu">
+
+                    <div class="menu_box_right">
+                        <a n:href="Sign:in" n:if="!$logged" class="btn btn-primary btn-sm active" role="button">Prihlásenie</a>
+                        
+                        <a n:href="Homepage:" n:if="$logged" style = "align: left" class="btn btn-primary btn-sm active" role="button">Prehľad cechu</a>
+                        <a n:href="Cech:showAll 501" n:if="$logged" style = "align: left" class="btn btn-primary btn-sm active" role="button">Návody</a>
+                        <span n:if="$nick" style = "align: right"><strong>Prihlásený:</strong> {$nick} <a n:href="Sign:out" n:if="$logged" class="btn btn-primary btn-sm active" role="button">Odhlásiť</a></span>
+                    </div>
+ 
+            </div>
+            <div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
+            {include content}
+        </div>
+
+	{block scripts}
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="https://nette.github.io/resources/js/netteForms.min.js"></script>
+	<script src="{$basePath}/js/main.js"></script>
+	<script src="{$basePath}/3rd/bootstrap/js/bootstrap.js"></script>
+	{/block}
+</body>
+</html>
+
+<style>
+    .menu_box_left {
+        display: block;
+		padding: 9.5px;
+		margin: 0 0 10px;
+		font-size: 13px;
+		line-height: 1.42857143;
+		color: #333;
+		word-break: break-all;
+		word-wrap: break-word;
+		background-color: #f5f5f5;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+        text-align: left;
+    }
+	
+	.menu_box_right {
+        display: block;
+		padding: 9.5px;
+		margin: 0 0 10px;
+		font-size: 13px;
+		line-height: 1.42857143;
+		color: #333;
+		word-break: break-all;
+		word-wrap: break-word;
+		background-color: #f5f5f5;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+        text-align: right;
+    }
+	
+	.foe_radius {
+		display: block;
+		padding: 9.5px;
+		margin: 0px;
+		font-size: 13px;
+		line-height: 1.42857143;
+		word-break: break-all;
+		word-wrap: break-word;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+	}
+	
+	.bunka {
+        text-align: center;
+    }
+
+</style>

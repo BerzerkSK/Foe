@@ -1,0 +1,36 @@
+
+	<div>
+        <h1>Cech: {$cech['nazov_cechu']} ({$cech['server']})</h1><br>
+        <table class="table table-striped">
+            <tr>
+                <th class="bunka"> Úroveň: </th>
+                <th class="bunka"> Počet členov: </th>
+                <th class="bunka"> Počet VB hvezdáreň: </th>
+                <th class="bunka"> Počet VB atomium: </th>
+                <th class="bunka"> Počet VB oblúk: </th>
+            </tr>
+            <tr>
+                <td class="bunka">{$cech['uroven']}</td>
+                <td class="bunka">{$pocet_clenov}</td>
+                <td class="bunka">{$hvezdaren_pocet}</td>
+                <td class="bunka">{$atomium_pocet}</td>
+                <td class="bunka">{$obluk_pocet}</td>
+            </tr>
+            <tr>
+                <th>Informačná tabuľa:</th>
+                <td colspan="4" title="Pre odriadkovanie vložte <br>.">{$cech['info']|noescape}</td>
+            </tr>
+            <tr n:if="!($is_role_clen)">
+                <th>Poznámka:</th>
+                <td colspan="4" title="Pre odriadkovanie vložte <br>.">{$cech['poznamka']|noescape}</td>
+            </tr>
+        </table>
+    </div>
+    <div n:if="$is_role_admin" class="menu_box_left">
+		<a n:href="User:create" class="btn btn-primary btn-sm active" role="button">Pridadanie nového člena</a>
+		<a n:href="Cech:editCech" class="btn btn-primary btn-sm active" role="button">Uprav cechové údaje</a>
+                <a n:href="Prispevok:hromadnyPrispevok" class="btn btn-primary btn-sm active" role="button">Hromadné príspevky</a>
+	</div>
+    <br>
+
+

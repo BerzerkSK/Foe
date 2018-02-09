@@ -1,0 +1,35 @@
+<div n:if="$users_cech">
+        <div>
+            <table class="table table-striped">
+                <tr>
+                    <th>Hráč</th>
+                    <th>Éra</th>
+                    <th title="Hvezdáreň">HV</th>
+                    <th title="Atómium">AT</th>
+                    <th title="Oblúk">OB</th>
+                    <th title="Suroviny z VB za 7 dní pri pravidelnom vyberaní">S/7D</th>
+                    <th title="Príspevky hráča">Príspevky</th>
+                </tr>
+                <tr n:foreach="$users_cech as $clen">
+                    <td><a n:tag-if="($is_role_admin || $is_role_superadmin) || ($is_role_clen && $user_id == $clen->userid)" n:href="User:edit $clen->userid" class="btn btn-default btn-sm active" role="button">{$clen->nick}</a></td>
+                    <td>{$ery[$clen->era]['nazov']}</td>
+                    <td style="text-align: center"><span n:if="$clen->hvezdaren > 0">{$clen->hvezdaren}</span></td>
+                    <td style="text-align: center"><span n:if="$clen->atomium > 0">{$clen->atomium}</span></td>
+                    <td style="text-align: center"><span n:if="$clen->obluk > 0">{$clen->obluk}</span></td>
+					
+                    {var $suroviny_spolu = 7*(($hvezdaren_info[$clen->hvezdaren] * 5)+($atomium_info[$clen->atomium] * 5)+($obluk_info[$clen->obluk] * 5))}
+					
+					<td style="text-align: center"><span n:if="$suroviny_spolu > 0">{$suroviny_spolu}</span></td>
+                    <td>
+						<a n:if="($is_role_admin || $is_role_superadmin)" n:href="Prispevok:vypisVsetko $clen->userid" class="btn btn-default btn-sm active" role="button">Príspevky</a>
+{*						<a n:if="($is_role_admin || $is_role_superadmin) || ($is_role_clen && $user_id == $clen->userid)" n:href="Prispevok:vypisVsetko $clen->userid" class="btn btn-default btn-sm active" role="button">Príspevky</a>
+*}
+                    </td>
+                    <tr n:if="!($is_role_clen)">
+			<td>Poznámka:</td>
+			<td colspan="6"><p n:if="$clen->last_login !== null" style="color: green">Posledné prihlásenie: {$clen->last_login|date:'%d.%m.%Y - %H:%M:%S'}</p>{$clen->poznamka}</td>
+                    </tr>
+                </tr>
+            </table>
+        </div>
+    </div>
